@@ -17,6 +17,7 @@ import {
   Filter,
   ArrowLeft,
 } from "lucide-react";
+import { useEffect } from "react";
 
 // ============================================
 // DATOS DE NOTICIAS - Modificar aquí para actualizar contenido
@@ -116,6 +117,9 @@ const newsArticles = [
 ];
 
 export default function NoticiasPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   // Helper function para obtener el icono correcto
   const getIcon = (iconName) => {
     switch (iconName) {

@@ -13,6 +13,7 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 // ============================================
 // DATOS DE EVENTOS - Modificar aquí para actualizar contenido
@@ -113,6 +114,9 @@ const upcomingEvents = [
 ];
 
 export default function CalendarioPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="min-h-screen bg-white">
       {/* <div className="bg-blue-600 text-white py-2 text-center text-sm">

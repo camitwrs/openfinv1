@@ -1,5 +1,5 @@
-
 import { Calendar, Newspaper, ArrowRight, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -53,11 +53,12 @@ export default function ActividadesPage() {
                   <span>Comunicados oficiales</span>
                 </div>
               </div>
-
-              <Button className="w-full group/btn" size="lg">
-                <span>Ver Noticias</span>
-                <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-              </Button>
+              <Link to="/actividades/noticias">
+                <Button className="w-full group/btn" size="lg">
+                  <span>Ver Noticias</span>
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
             </div>
           </Card>
 
@@ -93,13 +94,15 @@ export default function ActividadesPage() {
                 </div>
               </div>
 
-              <Button
-                className="w-full group/btn bg-black/20 hover:bg-black/40 text-black-foreground"
-                size="lg"
-              >
-                <span>Ver Calendario</span>
-                <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-              </Button>
+              <Link to="/actividades/calendario">
+                <Button
+                  className="w-full group/btn bg-black/20 hover:bg-black/40 text-black-foreground"
+                  size="lg"
+                >
+                  <span>Ver Calendario</span>
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
             </div>
           </Card>
         </div>
