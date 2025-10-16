@@ -1,16 +1,7 @@
-// src/pages/DesafiosPage.jsx
-// React-Vite App
-
 import {
-  Users,
-  DollarSign,
-  Handshake,
   ArrowRight,
   Mail,
-  Calendar,
-  Edit,
-  Send,
-  CheckCircle,
+  ArrowDown,
   Trophy,
   BellRing,
   Download, // Importamos el icono de descarga
@@ -37,7 +28,7 @@ import matchupDetalleLogo from "../assets/matchup-azul-recortado.png";
 
 import FI3_image from "../assets/imagen_fondo_concursable.png";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 // Nuevo componente de línea de tiempo
 const Timeline = ({ timelineItems }) => {
@@ -52,7 +43,7 @@ const Timeline = ({ timelineItems }) => {
               ? "bg-gradient-to-r sm:bg-gradient-to-b"
               : ""
           }
-          from-blue-400 to-cyan-400 
+          from-sky-700 to-cyan-400 
           transform sm:-translate-y-1/2 z-0
           ${/* Horizontal en desktop */ ""}
           sm:w-full sm:h-0.5 
@@ -66,12 +57,12 @@ const Timeline = ({ timelineItems }) => {
           key={index}
           className="flex-1 flex flex-col items-center text-center px-4 py-4 z-10 relative"
         >
-          <div className="w-12 h-12 rounded-full bg-white border-2 border-blue-400 flex items-center justify-center shadow-md text-blue-600">
+          <div className="w-12 h-12 rounded-full bg-white border-2 border-sky-500 flex items-center justify-center shadow-md text-sky-600">
             {item.icon}
           </div>
           <div className="mt-2">
             <h4 className="font-semibold text-sm text-sky-800">{item.title}</h4>
-            <p className="text-xs text-slate-600">{item.date}</p>
+            <p className="text-md text-slate-600">{item.date}</p>
           </div>
         </div>
       ))}
@@ -111,7 +102,7 @@ export default function DesafiosPage() {
         "La Comisión para el Mercado Financiero (CMF) es un servicio público de carácter técnico que vela por el correcto funcionamiento, desarrollo y estabilidad del mercado financiero, incluyendo los mercados de valores, seguros, bancos e instituciones financieras.",
       image: fondodesafios, // Imagen de fondo para la card
       secondaryLogo: cmf, // Logo CMF para la card
-      gradient: "from-blue-700 to-blue-100", // Gradiente para la card
+      gradient: "from-sky-700 to-sky-100", // Gradiente para la card
       details: {
         logo: cmfDetalleLogo, // Logo específico para la sección de detalle CMF
         context: {
@@ -163,7 +154,7 @@ export default function DesafiosPage() {
         "NanoTC Chile SpA es una empresa de base científico-tecnológica (EBCT) dedicada a la producción de nanopartículas de cobre (NPCu) y de óxido de grafeno (OG) y al desarrollo de nuevas aplicaciones de estos productos en la industria.",
       image: fondodesafios,
       secondaryLogo: nano,
-      gradient: "from-blue-700 to-blue-100",
+      gradient: "from-sky-700 to-sky-100",
       details: {
         logo: nanoDetalleLogo,
         context: {
@@ -207,7 +198,7 @@ export default function DesafiosPage() {
         "Instancia orientada a que equipos académicos/as PUCV propongan sus propios desafíos en colaboración con la industria, a partir de oportunidades detectadas en el evento MatchUp u otras iniciativas de vinculación universidad–industria.",
       image: fondodesafios,
       secondaryLogo: matchup,
-      gradient: "from-blue-700 to-blue-100",
+      gradient: "from-sky-700 to-sky-100",
       details: {
         logo: matchupDetalleLogo,
         context: {
@@ -234,12 +225,12 @@ export default function DesafiosPage() {
     {
       icon: <Download className="w-8 h-8" />,
       title: "Postulación",
-      date: "Hasta 29 de Agosto de 2025",
+      date: "Hasta 5 de Septiembre 2025",
     },
     {
       icon: <Trophy className="w-8 h-8" />,
       title: "Resultados",
-      date: "5 de Septiembre de 2025",
+      date: "Viernes 12 de Septiembre de 2025",
     },
   ];
 
@@ -255,17 +246,12 @@ export default function DesafiosPage() {
     "/archivos/bases-convocatoria-desafios-ingenieria-pucv-2025-v3.pdf";
 
   return (
-    <div className="bg-slate-50 py-16">
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-sky-100/30 rounded-full -translate-y-40 translate-x-40"></div>
-          <div className="absolute bottom-0 left-0 w-60 h-60 bg-cyan-100/20 rounded-full translate-y-32 -translate-x-32"></div>
-        </div>
-
+    <div className="bg-slate-50 pt-16 pb-6">
+      <div className="relative">
         <div className="relative max-w-7xl mx-auto px-4 py-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12 items-center lg:items-start text-center lg:text-left">
             <div className="mb-8 lg:mb-0 lg:col-span-2">
-              <h1 className="text-4xl md:text-5xl lg:text-4xl font-extrabold text-sky-900 mb-4 leading-tight">
+              <h1 className="text-5xl font-extrabold text-cyan-900 mb-6 tracking-tight">
                 Desafíos de Ingeniería PUCV
               </h1>
               <div className="w-24 h-0.5 bg-gradient-to-r from-sky-600 to-cyan-500 rounded-full mx-auto lg:mx-0 mb-6"></div>
@@ -280,13 +266,15 @@ export default function DesafiosPage() {
               <p className="text-lg md:text-xl font-extrabold mt-2 text-sky-900">
                 ¿Eres académico/a y te interesan los desafíos con la industria?
               </p>
-              <Button
+              <button
                 onClick={scrollToInscripcion}
-                className="bg-gradient-to-r cursor-pointer from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-700 text-white font-bold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-base md:text-lg uppercase w-full sm:w-auto"
+                className="bg-gradient-to-r cursor-pointer from-sky-700 to-sky-500 hover:to-sky-400
+             text-white font-bold px-4 py-2 rounded-lg shadow-lg hover:shadow-xl 
+             transition-all duration-300 text-base md:text-lg uppercase flex items-center justify-center hover:scale-105"
               >
                 PARTICIPA
                 <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
+              </button>
             </div>
           </div>
 
@@ -306,7 +294,7 @@ export default function DesafiosPage() {
                     <div className="relative h-48 overflow-hidden">
                       <Badge
                         variant="default"
-                        className="absolute bottom-12 left-3 z-30 bg-blue-600 text-white hover:bg-blue-700"
+                        className="absolute bottom-12 left-3 z-30 bg-sky-600 text-white"
                       >
                         Concurso
                       </Badge>
@@ -356,7 +344,7 @@ export default function DesafiosPage() {
                     className="max-w-7xl mx-auto px-8 py-8 bg-white shadow-md rounded-lg mb-16"
                   >
                     <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-                      <div className="bg-[#3D82EB] text-white px-4 py-2 rounded-md font-extrabold text-xl mb-4 md:mb-0">
+                      <div className="bg-sky-600 text-white px-4 py-2 rounded-md font-extrabold text-xl mb-4 md:mb-0">
                         {service.title}
                       </div>
                       {service.details.logo && (
@@ -377,7 +365,7 @@ export default function DesafiosPage() {
                             : ""
                         }
                       >
-                        <h2 className="text-xl font-extrabold text-[#3D82EB] mb-2">
+                        <h2 className="text-xl font-extrabold text-sky-600 mb-2">
                           {service.details.context.title}
                         </h2>
                         <p className="text-sky-800 leading-relaxed">
@@ -385,7 +373,7 @@ export default function DesafiosPage() {
                         </p>
                       </div>
                       <div>
-                        <h2 className="text-xl font-extrabold text-[#3D82EB] mb-2">
+                        <h2 className="text-xl font-extrabold text-sky-600 mb-2">
                           {service.details.report?.title ||
                             service.details.applicationIndustry?.title}
                         </h2>
@@ -417,7 +405,7 @@ export default function DesafiosPage() {
 
                     {service.details.mainChallenge && (
                       <div className="mb-8">
-                        <h2 className="text-xl font-extrabold text-[#3D82EB] mb-4">
+                        <h2 className="text-xl font-extrabold text-sky-600 mb-4">
                           {service.details.mainChallenge.title}
                         </h2>
                         <p className="text-sky-600 text-md font-bold leading-relaxed">
@@ -431,9 +419,9 @@ export default function DesafiosPage() {
                         (challenge, index) => (
                           <div
                             key={index}
-                            className="bg-blue-50 px-6 py-4 rounded-lg"
+                            className="bg-sky-50 px-6 py-4 rounded-lg"
                           >
-                            <h3 className="text-md font-extrabold text-[#3D82EB] mb-2">
+                            <h3 className="text-md font-extrabold text-sky-600 mb-2">
                               {challenge.title}
                             </h3>
                             <p className="text-sky-800 text-sm leading-relaxed">
@@ -449,7 +437,7 @@ export default function DesafiosPage() {
           </div>
 
           <div className="bg-white p-8 rounded-lg shadow-md mb-16">
-            <div className="relative bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg p-8 mb-8 overflow-hidden">
+            <div className="relative bg-gradient-to-r from-sky-600 to-cyan-600 rounded-lg p-8 mb-8 overflow-hidden">
               <div
                 className="absolute inset-0 w-full h-full object-cover rounded-lg opacity-30"
                 style={{
@@ -471,18 +459,18 @@ export default function DesafiosPage() {
                   </p>
                 </div>
                 <div className="md:w-1/3 flex justify-center md:justify-end">
-                  <Button
+                  <button
                     onClick={scrollToInscripcion}
-                    className="cursor-pointer mt-16 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 hover:scale-102 border-2 text-white font-bold px-10 py-6 rounded-lg shadow-lg transition-all duration-300 text-lg uppercase"
+                    className="cursor-pointer mt-16 bg-gradient-to-r from-sky-700 to-sky-500 hover:to-sky-400 hover:scale-105 border-2 text-white font-bold px-4 py-2 rounded-lg shadow-lg transition-all duration-300 text-lg uppercase"
                   >
                     INSCRÍBETE AL DESAFÍO
-                  </Button>
+                  </button>
                 </div>
               </div>
             </div>
             <div className="flex flex-col md:flex-row justify-between items-start mb-12">
               <div className="mb-4 md:mb-0">
-                <h2 className="text-2xl font-extrabold text-[#3D82EB] mb-4">
+                <h2 className="text-2xl font-extrabold text-sky-600 mb-4">
                   Desafíos
                 </h2>
                 <ol className="list-decimal list-inside text-sky-800 leading-relaxed text-lg">
@@ -516,14 +504,17 @@ export default function DesafiosPage() {
                 href={BASES_CONCURSO_PDF_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="cursor-pointer font-bold px-6 py-4 rounded-md shadow-md transition-colors text-lg uppercase bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 hover:scale-102 border-2 text-white flex items-center justify-center text-center"
+                className="bg-gradient-to-r cursor-pointer from-sky-700 to-sky-500 hover:to-sky-400
+             text-white font-bold px-4 py-2 rounded-lg shadow-lg hover:shadow-xl 
+             transition-all duration-300 text-base md:text-lg uppercase flex items-center justify-center hover:scale-105"
               >
-                BASES DEL CONCURSO
+                <Download className="mr-2 h-5 w-5" />
+                DESCARGAR BASES DEL CONCURSO
               </a>
             </div>
             {/* Proceso de postulación - Cronograma */}
             <div ref={inscripcionRef} className="mb-12 pt-8">
-              <h2 className="text-2xl font-extrabold text-[#3D82EB] mb-6">
+              <h2 className="text-2xl font-extrabold text-sky-600 mb-6">
                 Proceso de postulación
               </h2>
               <div className="space-y-4 text-sky-800 text-lg leading-relaxed mb-8">
@@ -541,16 +532,17 @@ export default function DesafiosPage() {
                   <span className="font-bold">3) Postulación: </span>
                   Descarga el formulario de postulación a continuación,
                   complétalo y envíalo al correo electrónico{" "}
-                  <span className="font-semibold text-blue-600">
+                  <span className="font-semibold text-sky-600">
                     openfin@pucv.cl
                   </span>
                   .
                 </p>
+
                 <p>
                   <span className="font-bold">4) Resultados:</span> Los
                   resultados se comunicarán el{" "}
                   <span className="font-bold">
-                    Viernes 5 de Septiembre de 2025.
+                    Viernes 12 de Septiembre de 2025.
                   </span>
                 </p>
               </div>
@@ -564,7 +556,11 @@ export default function DesafiosPage() {
                   download
                   className="inline-block w-full sm:w-auto"
                 >
-                  <Button className="w-full sm:w-auto cursor-pointer bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-700 text-white font-bold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-sm sm:text-base md:text-lg uppercase">
+                  <button
+                    className="bg-gradient-to-r cursor-pointer from-sky-700 to-sky-500 hover:to-sky-400
+             text-white font-bold px-4 py-2 rounded-lg shadow-lg hover:shadow-xl 
+             transition-all duration-300 text-base md:text-lg uppercase flex items-center justify-center hover:scale-105"
+                  >
                     <Download className="mr-2 h-5 w-5" />
                     <span className="hidden sm:inline">
                       Descargar Formulario de Postulación
@@ -572,12 +568,12 @@ export default function DesafiosPage() {
                     <span className="inline sm:hidden">
                       Descargar Formulario
                     </span>
-                  </Button>
+                  </button>
                 </a>
               </div>
             </div>
             <div className="max-w-7xl mx-auto px-4 py-8">
-              <h2 className="text-2xl font-extrabold text-[#3D82EB] mb-4">
+              <h2 className="text-2xl font-extrabold text-sky-600 mb-4">
                 Financiamiento
               </h2>
               <p className="text-lg text-sky-800 leading-relaxed">

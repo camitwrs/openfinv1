@@ -22,6 +22,7 @@ import apoyaINES from "../../assets/ines-blanco.png"; // LOGO INES+D
 import apoyaANID from "../../assets/anid-blanco.png"; // LOGO ANID
 
 function Footer() {
+  const currentYear = new Date().getFullYear();
   // Define tus grupos de logos con sus imágenes Y AHORA SUS LINKS
   const sections = [
     {
@@ -81,7 +82,7 @@ function Footer() {
 
   return (
     <footer className="relative z-50 p-8 sm:p-12 text-white text-center">
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-sky-800 to-sky-500"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
         {sections.map((section, sectionIndex) => (
@@ -93,10 +94,10 @@ function Footer() {
               <div
                 className={`grid gap-y-4 gap-x-10 items-center justify-items-center ${
                   section.logos.length === 2
-                    ? "grid-cols-2 lg:grid-cols-2 xl:grid-cols-2"
+                    ? "grid-cols-3 lg:grid-cols-2 xl:grid-cols-2"
                     : section.logos.length === 3
-                    ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3"
-                    : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5"
+                    ? "grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3"
+                    : "grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5"
                 } `}
               >
                 {section.logos.map((logo, logoIndex) =>
@@ -128,6 +129,14 @@ function Footer() {
             </div>
           </div>
         ))}
+
+        {/* Separador */}
+        <div className="border-t border-white/30 pt-4 mt-4"></div>
+
+        {/* Sección de Copyright */}
+        <p className="text-sm tracking-widest text-white/80 mt-4">
+          &copy; {currentYear} 
+        </p>
       </div>
     </footer>
   );
